@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { MainData } from '../models';
-import uniqBy from 'lodash/uniqBy';
+// @ts-ignore
+import uniqBy from 'lodash-es/uniqBy';
 
 @Injectable({
   providedIn: 'root'
