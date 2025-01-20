@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Gender, MainData, Status } from '../../models';
 import { MainService } from '../../services';
 import { take } from 'rxjs';
-import shuffle from 'lodash/shuffle';
-import xor from 'lodash/xor';
 
 @Component({
   selector: 'app-male',
@@ -61,7 +59,7 @@ export class MaleComponent implements OnInit {
   public onStart(): void {
     this.round += 1;
     this.currectStatus = Status.Main;
-    this.beforeList = shuffle(this.nameSelected);
+    this.beforeList = this.shuffle(this.nameSelected);
   }
 
   public onChoose(): void {
@@ -83,7 +81,7 @@ export class MaleComponent implements OnInit {
       } else {
         this.round += 1;
         this.currectStatus = Status.Main;
-        this.beforeList = shuffle(this.afterList);
+        this.beforeList = this.shuffle(this.afterList);
         this.afterList = [];
       }
     }
@@ -94,7 +92,25 @@ export class MaleComponent implements OnInit {
   }
 
   public get getInvalidName(): MainData[] {
-    return xor(this.nameSelected, this.beforeList);
+    return this.xor(this.nameSelected, this.beforeList);
+  }
+
+  private shuffle(array: any[]) {
+    let shuffledArray = array.slice(); // Создаем копию массива
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+    }
+    return shuffledArray;
+  }
+
+  private xor(...arrays: any[]) {
+    const allItems = arrays.reduce((acc, array) => acc.concat(array), []);
+    const itemCounts = allItems.reduce((count: any, item: any) => {
+      count[item] = (count[item] || 0) + 1;
+      return count;
+    }, {});
+    return allItems.filter((item: any) => itemCounts[item] === 1);
   }
 
   public onSetRandomBoyName(): void {
