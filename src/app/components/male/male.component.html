@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="content mt-5 p-5 bg-blue-50 border-round">
+    @switch (currectStatus) {
+      @case (status.Main) {
+        <div class="flex flex-column align-items-center justify-content-center">
+          <p class="text-3xl font-semibold text-800 my-1">Раунд {{ round }}</p>
+          <p class="text-xl font-mediumtext-500">Остлось {{ beforeList.length }} имен из {{ nameSelected.length }}</p>
+        </div>
+
+        <div class="flex justify-content-center">
+          <button
+            pButton
+            type="button"
+            [label]="beforeList.length === nameSelected.length ? 'Начать выбор имени' : 'Следующий раунд'"
+            (click)="onChoose()"
+          ></button>
+        </div>
+
+        <div class="grid">
+          <div class="col-6">
+            <p class="text-2xl">Выбранные имена:</p>
+            <div class="flex flex-wrap gap-2">
+              @for (name of beforeList; track name) {
+                <span class="bg-green-100 p-2">
+                  {{ name.name }}
+                </span>
+              }
+            </div>
+          </div>
+          <div class="col-6">
+            <p class="text-2xl">Имена которые вам не понравились:</p>
+            <div class="flex flex-wrap gap-2">
+              @for (name of getInvalidName; track name) {
+                <span class="bg-pink-200 p-2">
+                  {{ name.name }}
+                </span>
+              }
+            </div>
+          </div>
+        </div>
+      }
+      @case (status.Selection) {
+        <p class="text-center text-3xl font-semibold text-800 mb-6">Выберите имя, которое вам нравится больше.</p>
+        <p class="text-center font-semibold text-600">{{ count }} / {{ allCountStep }}</p>
+
+        <div class="flex flex-wrap gap-4">
+          @for (item of options; track item) {
+            <div
+              class="flex-1 flex-column col-6 cursor-pointer hover:bg-green-100 border-300 surface-overlay border-2 border-round font-bold p-3 hover:shadow-8 scalein animation-duration-500 animation-iteration-1"
+              (click)="onSelectName(item)"
+            >
+              <p class="text-center text-4xl font-semibold text-800 my-1">{{ item.name }}</p>
+              <div class="flex justify-content-center gap-1 font-medium text-2xl text-700">
+                <p>{{ data.firstName }}</p>
+                <p>{{ item.name }}</p>
+                <p>{{ data.thirdName }}</p>
+              </div>
+
+              <div class="flex justify-content-center">
+                <div class="flex gap-1 font-medium text-700">
+                  <span>{{ data.firstName }}</span>
+                  <span>{{ data.sonsName }}</span>
+                  <span class="font-semibold">{{ item.sName }}</span>
+                </div>
+              </div>
+              <div class="flex justify-content-center">
+                <div class="flex gap-1 font-medium text-700">
+                  <span>{{ data.firstName }}a</span>
+                  <span>{{ data.daughtersName }}</span>
+
+                  <span class="font-semibold"> {{ item.dName }} </span>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      }
+      @case (status.Result) {
+        <div class="flex flex-column gap-3">
+          <p class="text-center text-3xl font-semibold text-800 my-1">
+            Поздравляем вас с выбором имени для вашего малыша!
+          </p>
+
+          <p class="text-primary text-center text-5xl font-semibold text-800 my-1">{{ afterList[0].name }}</p>
+          <div class="congratulations">
+            <p class="heading">Дорогие родители,</p>
+            <p>
+              С величайшим волнением и радостью мы хотим поздравить вас с этим замечательным моментом - выбором имени
+              для вашего малыша! Это такое важное решение, и ваше решение - просто великолепно.
+            </p>
+            <p>
+              Пусть имя <span class="child-name">{{ afterList[0].name }}</span> станет источником бесконечной радости,
+              смеха и любви в вашей семье. Пусть каждая буква этого имени будет напоминать вам о прекрасных моментах,
+              которые вы проведете вместе, и о надежде на светлое будущее.
+            </p>
+            <p>
+              Мы желаем вашему малышу крепкого здоровья, благополучия и бесконечного счастья. Пусть каждый день его
+              жизни будет наполнен чудесами и вдохновением.
+            </p>
+            <p class="signature">С наилучшими пожеланиями</p>
+          </div>
+        </div>
+      }
+    }
+  </div>
+</div>
+
