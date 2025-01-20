@@ -2,7 +2,6 @@ import {
   DataEntryComponent, FemaleComponent,
   GenderSelectionComponent,
   MaleComponent,
-  NameListManagementComponent,
   WelcomeComponent
 } from './components';
 import { RouterModule, Routes } from '@angular/router';
@@ -15,7 +14,6 @@ const routes: Routes = [
   { path: 'data-entry', component: DataEntryComponent },
   { path: 'boy', component: MaleComponent },
   { path: 'girl', component: FemaleComponent },
-  { path: 'name-list-management', component: NameListManagementComponent },
   { path: '**', redirectTo: '/welcome' } // Redirect any unknown routes to welcome
 ];
 

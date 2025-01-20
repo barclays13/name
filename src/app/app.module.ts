@@ -16,13 +16,13 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { TableModule } from 'primeng/table';
 import { RouterModule } from '@angular/router';
 
-import { DataEntryComponent, GenderSelectionComponent, MainComponent, NameListManagementComponent, WelcomeComponent } from './components';
+import { DataEntryComponent, GenderSelectionComponent, WelcomeComponent } from './components';
 import { AppComponent } from './app.component';
 import { MaleComponent } from './components/male/male.component';
 import { FemaleComponent } from './components/female/female.component';
 
 @NgModule({
-  declarations: [AppComponent, MainComponent, WelcomeComponent, GenderSelectionComponent, DataEntryComponent, NameListManagementComponent, MaleComponent, FemaleComponent],
+  declarations: [AppComponent, WelcomeComponent, GenderSelectionComponent, DataEntryComponent, MaleComponent, FemaleComponent],
   imports: [
     AppRoutingModule,
     ReactiveFormsModule,
