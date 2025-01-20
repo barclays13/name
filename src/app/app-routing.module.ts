@@ -1,5 +1,3 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import {
   DataEntryComponent, FemaleComponent,
   GenderSelectionComponent,
@@ -7,6 +5,8 @@ import {
   NameListManagementComponent,
   WelcomeComponent
 } from './components';
+import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
 
 const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
@@ -16,8 +16,6 @@ const routes: Routes = [
   { path: 'boy', component: MaleComponent },
   { path: 'girl', component: FemaleComponent },
   { path: 'name-list-management', component: NameListManagementComponent },
-  // { path: 'tournament', component: TournamentComponent },
-  // { path: 'winner', component: WinnerComponent },
   { path: '**', redirectTo: '/welcome' } // Redirect any unknown routes to welcome
 ];
 

@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { MainData } from '../models';
-// @ts-ignore
-import uniqBy from 'lodash-es/uniqBy';
 
 @Injectable({
   providedIn: 'root'
@@ -262,6 +260,19 @@ export class MainService {
 
   public getData(isMan: boolean): Observable<MainData[]> {
     const data = isMan ? this.boyData : this.girlData;
-    return of(uniqBy(data, 'name'));
+    return of(this.uniqBy(data, 'name'));
+  }
+
+  private uniqBy(array: any[], key: any) {
+    const seen = new Set();
+    return array.filter((item) => {
+      const value = typeof key === 'function' ? key(item) : item[key];
+      if (seen.has(value)) {
+        return false;
+      } else {
+        seen.add(value);
+        return true;
+      }
+    });
   }
 }
