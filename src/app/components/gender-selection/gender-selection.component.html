@@ -1,18 +1,15 @@
-<div class="h-full  flex justify-content-center align-items-center">
-	<div
-		class="flex w-20rem flex-column justify-content-center align-items-center cursor-pointer border-300 surface-overlay border-2 border-round font-bold p-5 hover:shadow-8 scalein animation-duration-500 animation-iteration-1"
-	>
-		<p-selectButton
-			[options]="stateOptions"
-			[(ngModel)]="currentGender"
-			optionLabel="label"
-			optionValue="value"
-		></p-selectButton>
-
-		<div class="flex justify-content-between w-full mt-6">
-			<p-button label="Назад" routerLink="/welcom" [outlined]="true"></p-button>
-			<p-button label="Далее" (click)="onNext()" [outlined]="true"> </p-button>
-		</div>
-	</div>
-
+<div class="relative h-full w-full flex flex-column align-items-center justify-content-center  justify-content-between">
+  <div></div>
+  <p-selectButton
+    [options]="stateOptions"
+    [(ngModel)]="currentGender"
+    optionLabel="label"
+    optionValue="value"
+  ></p-selectButton>
+  <div class="absolut bottom-0 flex justify-content-between w-full">
+    <p-button icon="pi pi-angle-left" routerLink="/welcom" [rounded]="true" [text]="true" />
+    <p-button icon="pi pi-angle-right" (click)="onNext()" [rounded]="true" [text]="true" />
+  </div>
 </div>
+
+

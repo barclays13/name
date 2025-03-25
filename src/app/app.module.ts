@@ -17,6 +17,11 @@ import { DataEntryComponent, GenderSelectionComponent, WelcomeComponent } from '
 import { AppComponent } from './app.component';
 import { MaleComponent } from './components/male/male.component';
 import { FemaleComponent } from './components/female/female.component';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { AccordionModule } from 'primeng/accordion';
+import { TableModule } from 'primeng/table';
+import { InputIconModule } from 'primeng/inputicon';
+import { IconFieldModule } from 'primeng/iconfield';
 
 @NgModule({
   declarations: [AppComponent, WelcomeComponent, GenderSelectionComponent, DataEntryComponent, MaleComponent, FemaleComponent],
@@ -32,6 +37,11 @@ import { FemaleComponent } from './components/female/female.component';
     InputTextModule,
     FloatLabelModule,
     SelectButtonModule,
+    TabMenuModule,
+    AccordionModule,
+    TableModule,
+    InputIconModule,
+    IconFieldModule
   ],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent]

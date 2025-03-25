@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Gender, MainData, Status } from '../../models';
 import { MainService } from '../../services';
 import { take } from 'rxjs';
@@ -6,12 +6,15 @@ import { take } from 'rxjs';
 @Component({
   selector: 'app-male',
   templateUrl: './male.component.html',
-  styleUrl: './male.component.scss'
+  styleUrl: './male.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class MaleComponent implements OnInit {
   public defaultNameList: MainData[] = [];
   public nameSelected: MainData[] = [];
   public beforeList: MainData[] = [];
+  public selectedBefore: MainData[] = [];
+
   public afterList: MainData[] = [];
   public options: MainData[] = [];
   public data: any;
@@ -25,6 +28,10 @@ export class MaleComponent implements OnInit {
   public thirdName: string = '';
   public sonsName: string = '';
   public daughtersName: string = '';
+  activeIndex: number | number[] = 0;
+
+
+
   public stateOptions: any[] = [
     { label: 'Мальчик', value: Gender.Boy, disabled: true },
     { label: 'Девочка', value: Gender.Girl, disabled: true }
@@ -37,11 +44,14 @@ export class MaleComponent implements OnInit {
 
   constructor(private readonly mainService: MainService) {}
 
+
+
   ngOnInit(): void {
     // @ts-ignore
     this.data = JSON.parse(localStorage.getItem('boyData'));
     this.firstSName = this.data.firstSName;
     this.firstDName = this.data.firstDName;
+
 
     this.mainService
       .getData(true)
@@ -56,17 +66,26 @@ export class MaleComponent implements OnInit {
       });
   }
 
+  public activeIndexChange(index: number | number[]){
+    this.activeIndex = index
+  }
+
   public onStart(): void {
     this.round += 1;
     this.currectStatus = Status.Main;
-    this.beforeList = this.shuffle(this.nameSelected);
+    this.beforeList = this.shuffle(this.nameSelected).sort((a, b) => a.name > b.name ? 1 : -1);
+
+    if(!this.selectedBefore.length){
+      this.selectedBefore = this.beforeList;
+    }
   }
 
   public onChoose(): void {
+    this.beforeList = this.shuffle(this.selectedBefore);
     this.afterList = [];
     this.currectStatus = Status.Selection;
     this.count = 1;
-    this.allCountStep = Math.floor(this.beforeList.length / 2);
+    this.allCountStep =  Math.floor(this.beforeList.length / 2);
     this.prepareOptions();
   }
 
@@ -81,7 +100,8 @@ export class MaleComponent implements OnInit {
       } else {
         this.round += 1;
         this.currectStatus = Status.Main;
-        this.beforeList = this.shuffle(this.afterList);
+        this.beforeList = this.shuffle(this.afterList).sort((a, b) => a.name - b.name);
+        this.selectedBefore = [...this.beforeList];
         this.afterList = [];
       }
     }
@@ -169,7 +189,7 @@ export class MaleComponent implements OnInit {
 
   private prepareOptions(): void {
     if (this.beforeList.length > 3) {
-      this.options = this.beforeList.slice(0, 2);
+      this.options = this.beforeList.slice(0, 2).sort();
       this.beforeList.splice(0, 2);
     } else {
       this.options = this.beforeList;

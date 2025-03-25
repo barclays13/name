@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Gender } from '../../models';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -6,7 +6,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-data-entry',
   templateUrl: './data-entry.component.html',
-  styleUrl: './data-entry.component.scss'
+  styleUrl: './data-entry.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class DataEntryComponent implements OnInit {
   public form!: FormGroup;

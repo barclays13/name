@@ -1,49 +1,45 @@
-<div class="h-full flex justify-content-center align-items-center" [formGroup]="form">
-	<div
-		class="flex gap-5 flex-column justify-content-center align-items-center cursor-pointer border-300 surface-overlay border-2 border-round p-5 hover:shadow-8 scalein animation-duration-500 animation-iteration-1"
-		*ngIf="form"
-		>
-	<div class="flex gap-5 w-full">
-		<p-floatLabel class="w-full">
-			<input class="w-full" id="firstSName" type="text" pInputText formControlName="firstName" />
-			<label for="firstSName">Фамилия ребенка:</label>
-		</p-floatLabel>
-		<p-floatLabel class="w-full">
-			<input class="w-full" id="thirdName" type="text" pInputText formControlName="thirdName" />
-			<label for="thirdName">Отчество ребенка:</label>
-		</p-floatLabel>
-	</div>
+<div class="relative h-full w-full flex flex-column align-items-center justify-content-center  justify-content-between">
+  <div></div>
+  @if(form) {
+    <div class="flex flex-column gap-5" [formGroup]="form">
+      <p-floatLabel class="w-full">
+        <input class="w-full" id="firstSName" type="text" pInputText formControlName="firstName" />
+        <label for="firstSName">Фамилия малыша</label>
+      </p-floatLabel>
+      <p-floatLabel class="w-full">
+        <input class="w-full" id="thirdName" type="text" pInputText formControlName="thirdName" />
+        <label for="thirdName">Его будущее отчество</label>
+      </p-floatLabel>
+      @if(currentGender === gender.Boy) {
+          <div class="w-full flex gap-2">
+            <p-floatLabel class="w-full">
+              <input class="w-full" id="sonsName" type="text" pInputText formControlName="sonsName" />
+              <label for="sonsName">Любое полное мужское имя</label>
+            </p-floatLabel>
+            <p-button
+              icon="pi pi-sync"
+              (click)="onSetRandomBoyName()"
+              [outlined]="true"
+            ></p-button>
+          </div>
+          <div class="w-full flex gap-2">
+            <p-floatLabel class="w-full ">
+              <input class="w-full" id="daughtersName" type="text" pInputText formControlName="daughtersName" />
+              <label for="daughtersName">Любое полное женское имя</label>
+            </p-floatLabel>
+            <p-button
+              icon="pi pi-sync"
+              (click)="onSetRandomGirleName()"
+              [outlined]="true"
+            ></p-button>
+          </div>
+      }
+    </div>
+  }
 
-	@if(currentGender === gender.Boy) {
-		<div class="flex gap-5 w-full">
-			<div class="w-full flex gap-2">
-				<p-floatLabel class="w-full">
-					<input class="w-15rem" id="sonsName" type="text" pInputText formControlName="sonsName" />
-					<label for="sonsName">Любое полное мужское имя:</label>
-				</p-floatLabel>
-				<p-button
-					icon="pi pi-sync"
-					(click)="onSetRandomBoyName()"
-					[outlined]="true"
-				></p-button>
-			</div>
-			<div class="w-full flex gap-2">
-				<p-floatLabel class="w-15rem">
-					<input class="w-full" id="daughtersName" type="text" pInputText formControlName="daughtersName" />
-					<label for="daughtersName">Любое полное женское имя:</label>
-				</p-floatLabel>
-				<p-button
-					icon="pi pi-sync"
-					(click)="onSetRandomGirleName()"
-					[outlined]="true"
-				></p-button>
-			</div>
-		</div>
-	}
-
-		<div class="flex justify-content-between w-full mt-6">
-			<p-button label="Назад"  (click)="onBack()" [outlined]="true"></p-button>
-			<p-button label="Далее"  (click)="onNext()" [disabled]="form.invalid" [outlined]="true"> </p-button>
-		</div>
-	</div>
+  <div class="absolut bottom-0 flex justify-content-between w-full">
+    <p-button icon="pi pi-angle-left"  (click)="onBack()" [rounded]="true" [text]="true" />
+    <p-button icon="pi pi-angle-right" [disabled]="form.invalid" (click)="onNext()" [rounded]="true" [text]="true" />
+  </div>
 </div>
+
