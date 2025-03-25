@@ -79,10 +79,10 @@
       @case (status.Selection) {
         <p class="text-center font-semibold text-600">{{ count }} / {{ allCountStep }}</p>
 
-        <div class="flex flex-wrap gap-4">
+        <div class="grid">
           @for (item of options; track item) {
             <div
-              class="card flex-column col-12 lg:col-6 cursor-pointer border-200 surface-overlay border-1 border-round-2xl font-bold p-3 hover:shadow-8 scalein animation-duration-500 animation-iteration-1"
+              class="card p-3 flex-column col-12 lg:col-6 cursor-pointer border-200 surface-overlay border-1 border-round-2xl font-bold p-3 hover:shadow-8 scalein animation-duration-500 animation-iteration-1"
               (click)="onSelectName(item)"
             >
               <p class="text-center text-xl font-bold text-700 my-0">{{ item.name }}</p>
